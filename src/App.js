@@ -1,44 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 import User from "./components/User/User";
-
-const INITIAL_EXPENSES = [
-  {
-    id: "e1",
-    title: "Toilet Paper",
-    amount: 94.12,
-    date: new Date(2020, 7, 14),
-  },
-  { id: "e2", title: "New TV", amount: 799.49, date: new Date(2021, 2, 12) },
-  {
-    id: "e3",
-    title: "Car Insurance",
-    amount: 294.67,
-    date: new Date(2021, 2, 28),
-  },
-  {
-    id: "e4",
-    title: "New Desk (Wooden)",
-    amount: 450,
-    date: new Date(2021, 5, 12),
-  },
-];
+import axios from "axios";
 
 const App = () => {
-  const [expenses, setExpenses] = useState(INITIAL_EXPENSES);
+  const [details, setDetails] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000")
+      .then((res) => {
+        const data = res.data.map((item) => ({
+          ...item,
+          date: new Date(item.date),
+        }));
+
+        setDetails(data);
+      })
+      .catch((err) => {});
+  }, []);
 
   const addExpenseHandler = (expense) => {
-    setExpenses((prevExpeneses) => {
-      return [expense, ...prevExpeneses];
-    });
+    setDetails((prevDetails) => [expense, ...prevDetails]);
   };
 
   return (
     <div>
       <User />
       <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses items={expenses} />
+      <Expenses items={details} />
     </div>
   );
 };

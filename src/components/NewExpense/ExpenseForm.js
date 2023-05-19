@@ -1,5 +1,6 @@
 import "./ExpenseForm.css";
 import React, { useState } from "react";
+import axios from "axios";
 
 const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
@@ -26,10 +27,11 @@ const ExpenseForm = (props) => {
       amount: +enteredAmount,
       date: new Date(enteredDate),
     };
-    props.onSaveExpenseData(expenseData);
+    axios.post("http://localhost:8000", expenseData);
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
+    props.onSaveExpenseData(expenseData);
   };
 
   return (
