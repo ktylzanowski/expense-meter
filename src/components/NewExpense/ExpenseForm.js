@@ -27,11 +27,19 @@ const ExpenseForm = (props) => {
       amount: +enteredAmount,
       date: new Date(enteredDate),
     };
-    axios.post("http://localhost:8000", expenseData);
-    setEnteredTitle("");
-    setEnteredAmount("");
-    setEnteredDate("");
-    props.onSaveExpenseData(expenseData);
+    axios
+      .post("http://localhost:8000", expenseData)
+      .then((response) => {
+        expenseData.pk = response.data.pk;
+
+        setEnteredTitle("");
+        setEnteredAmount("");
+        setEnteredDate("");
+        props.onSaveExpenseData(expenseData);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
