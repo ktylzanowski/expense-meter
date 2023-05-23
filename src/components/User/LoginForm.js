@@ -29,7 +29,7 @@ const LoginForm = (props) => {
             </div>
             <div className="login-form__control">
               <label>password</label>
-              <input type="pssword" onChange={passwordHandle}></input>
+              <input type="password" onChange={passwordHandle}></input>
             </div>
             <div className="login-form__buttons">
               <button onClick={handleCancel}>Cancel</button>
