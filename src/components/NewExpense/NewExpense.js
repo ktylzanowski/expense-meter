@@ -1,6 +1,7 @@
 import "./NewExpense.css";
 import ExpenseForm from "./ExpenseForm";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "../../context/AuthContext";
 
 const NewExpense = (props) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -20,10 +21,15 @@ const NewExpense = (props) => {
     setIsEditing(false);
   };
 
+  let {logoutUser} = useContext(AuthContext)
+
   return (
     <div className="new-expense">
       {!isEditing && (
-        <button onClick={startEditingHandler}>Add new expense</button>
+        <>
+          <button onClick={logoutUser}>Logout</button>
+          <button onClick={startEditingHandler}>Add new expense</button>
+        </>
       )}
       {isEditing && (
         <ExpenseForm

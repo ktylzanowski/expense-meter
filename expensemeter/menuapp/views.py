@@ -1,5 +1,5 @@
-from django.shortcuts import render
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from . models import *
 from . serializer import *
 from rest_framework.response import Response
@@ -8,26 +8,28 @@ from django.shortcuts import get_object_or_404, redirect
 from rest_framework import status
 
 
+
 class ExpenseView(APIView):
     serializer_class = ExpenseSerializer
-
+    permission_classes = [IsAuthenticated]
     def get(self, request):
+        user = request.user
         output = [{'pk':output.pk ,"title": output.title,
                    "amount": output.amount, "date": output.date}
-                   for output in Expense.objects.all()]
+                   for output in user.expense_set.all()]
         return Response(output)
     
     def post(self, request):
         amount = int(request.data['amount'])
-
         date_str = request.data['date']
         clean_date_str = date_str.split('T')[0]
         date = datetime.datetime.strptime(clean_date_str, '%Y-%m-%d').date()
-
+        user = request.user
         data = {
             'title': request.data['title'],
             'amount': amount,
             'date': date,
+            'user': user.pk,
         }
         
         serializer = ExpenseSerializer(data=data)

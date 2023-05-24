@@ -1,12 +1,13 @@
 import "./ExpenseForm.css";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import AuthContext from "../../context/AuthContext";
 
 const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
-
+  let { authTokens } = useContext(AuthContext);
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
   };
@@ -21,17 +22,20 @@ const ExpenseForm = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-
     const expenseData = {
       title: enteredTitle,
       amount: +enteredAmount,
       date: new Date(enteredDate),
     };
     axios
-      .post("http://localhost:8000", expenseData)
+      .post("http://localhost:8000", expenseData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + String(authTokens.access),
+        },
+      })
       .then((response) => {
         expenseData.pk = response.data.pk;
-
         setEnteredTitle("");
         setEnteredAmount("");
         setEnteredDate("");
