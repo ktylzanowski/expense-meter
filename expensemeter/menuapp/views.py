@@ -12,6 +12,7 @@ from rest_framework import status
 class ExpenseView(APIView):
     serializer_class = ExpenseSerializer
     permission_classes = [IsAuthenticated]
+    
     def get(self, request):
         user = request.user
         output = [{'pk':output.pk ,"title": output.title,

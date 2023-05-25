@@ -24,7 +24,7 @@ const LoginForm = (props) => {
               <input type="password" name="password"></input>
             </div>
             <div className="login-form__buttons">
-              <button onClick={handleCancel}>Cancel</button>
+              <button type="button" onClick={handleCancel}>Cancel</button>
               <button type="submit">Log in</button>
             </div>
           </div>

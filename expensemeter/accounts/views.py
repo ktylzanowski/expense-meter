@@ -1,10 +1,11 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import CreateAPIView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializer import UserSerializer
 from rest_framework import status
-from .models import MyUserManager, MyUser
+from .models import MyUser
 
 class getRoutes(APIView):
     def get(self, request):
@@ -28,11 +29,6 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-class RegisterView(APIView):
+class UserCreateView(CreateAPIView):
+    queryset = MyUser.objects.all()
     serializer_class = UserSerializer
-
-    def post(self, request):
-        email = self.request.data['email']
-        password = self.request.data['password']
-        MyUser.objects.create_user(email=email, password=password)
-        return Response(status=status.HTTP_201_CREATED)
