@@ -47,7 +47,6 @@
 
 .login-form__buttons button:first-child {
   background-color: red;
-  
 }
 .login-form__buttons button:first-child:hover {
   background-color: darkred;
@@ -57,5 +56,31 @@
   background-color: green;
 }
 .login-form__buttons button:last-child:hover {
-    background-color: darkgreen;
+  background-color: darkgreen;
+}
+
+.login-form__error {
+  color: red;
+  font-size: 16px;
+  margin-top: 8px;
+  border: white;
+  animation: shake 1s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
   }
+  25% {
+    transform: translateX(-4px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+  75% {
+    transform: translateX(-4px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

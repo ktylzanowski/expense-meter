@@ -34,6 +34,9 @@ class MyUser(AbstractBaseUser):
         verbose_name='email address',
         max_length=255,
         unique=True,
+        error_messages={
+            'unique': "The e-mail address is already taken.",
+        },
     )
 
     is_active = models.BooleanField(default=True)
