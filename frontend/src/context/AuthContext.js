@@ -17,7 +17,6 @@ export const AuthProvider = ({ children }) => {
       : null
   );
 
-  const [loading, setLoading] = useState(true);
   const [succes, setSucces] = useState(false);
   const [error, setError] = useState(false);
 
@@ -95,7 +94,7 @@ export const AuthProvider = ({ children }) => {
       }
     }, fourMinutes);
     return () => clearInterval(interval);
-  }, [authTokens, loading]);
+  }, [authTokens]);
 
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

@@ -35,18 +35,13 @@ const RegisterForm = (props) => {
       password2: password2,
     };
     axios
-      .post("http://localhost:8000/api/register", userDate, {
+      .post("http://localhost:8000/api/register/", userDate, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         loginUser(event);
-        if (response.data.messages){
-          response.data.messages.forEach((message) =>{
-            console.log(message)
-          })
-        }
       })
       .catch((error) => {
         if (error.response && error.response.data) {
@@ -75,7 +70,7 @@ const RegisterForm = (props) => {
         <Card className="login-form">
           <div className="login-form__controls">
             <div className="login-form__control">
-              <label>Login</label>
+              <label>Email</label>
               <input
                 type="text"
                 name="username"

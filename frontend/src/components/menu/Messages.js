@@ -9,7 +9,11 @@ const Messages = (props) => {
       setIsVisible(false);
     }, 5000);
   };
-  return <div> {isVisbile ? <p>{props.children}</p> : null} {timeVisible} </div>;
+  return (
+    <div>
+      {isVisbile ? <p>{props.children}</p> : null} {timeVisible}
+    </div>
+  );
 };
 
 export default Messages;

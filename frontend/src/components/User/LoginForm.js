@@ -8,7 +8,7 @@ const LoginForm = (props) => {
     props.onCancel();
   };
 
-  let { loginUser , error} = useContext(AuthContext);
+  let { loginUser, error } = useContext(AuthContext);
 
   return (
     <div>
@@ -16,7 +16,7 @@ const LoginForm = (props) => {
         <Card className="login-form">
           <div className="login-form__controls">
             <div className="login-form__control">
-              <label>Login</label>
+              <label>Email</label>
               <input type="text" name="username"></input>
             </div>
             <div className="login-form__control">
@@ -24,7 +24,9 @@ const LoginForm = (props) => {
               <input type="password" name="password"></input>
             </div>
             <div className="login-form__buttons">
-              <button type="button" onClick={handleCancel}>Cancel</button>
+              <button type="button" onClick={handleCancel}>
+                Cancel
+              </button>
               <button type="submit">Log in</button>
             </div>
           </div>

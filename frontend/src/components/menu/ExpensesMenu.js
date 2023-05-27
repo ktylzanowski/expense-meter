@@ -31,8 +31,7 @@ const ExpensesMenu = () => {
   };
 
   return (
-    <div>
-      
+    <div>      
       <NewExpense onAddExpense={addExpenseHandler} />
       {succes && <p className="message">{succes}</p>}
       <Expenses items={details} />

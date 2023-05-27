@@ -21,7 +21,7 @@ const NewExpense = (props) => {
     setIsEditing(false);
   };
 
-  let {logoutUser} = useContext(AuthContext)
+  let { logoutUser } = useContext(AuthContext);
 
   return (
     <div className="new-expense">
