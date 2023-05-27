@@ -42,6 +42,11 @@ const RegisterForm = (props) => {
       })
       .then((response) => {
         loginUser(event);
+        if (response.data.messages){
+          response.data.messages.forEach((message) =>{
+            console.log(message)
+          })
+        }
       })
       .catch((error) => {
         if (error.response && error.response.data) {

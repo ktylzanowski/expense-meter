@@ -4,6 +4,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializer import UserSerializer
 from rest_framework import status
+from django.contrib import messages
 
 class getRoutes(APIView):
     def get(self, request):
@@ -34,5 +35,6 @@ class UserCreateView(APIView):
         if serializer.is_valid():
             user = serializer.save()
             if user:
+                messages.success(request, "GOOD")
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

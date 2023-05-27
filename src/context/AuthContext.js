@@ -18,6 +18,9 @@ export const AuthProvider = ({ children }) => {
   );
 
   const [loading, setLoading] = useState(true);
+  const [succes, setSucces] = useState(false);
+  const [error, setError] = useState(false);
+
   let loginUser = async (e) => {
     e.preventDefault();
     let response = await fetch("http://127.0.0.1:8000/api/token/", {
@@ -35,8 +38,12 @@ export const AuthProvider = ({ children }) => {
       setAuthTokens(data);
       setUser(jwt_decode(data.access));
       localStorage.setItem("authTokens", JSON.stringify(data));
+      setSucces("Login")
+      setTimeout(() => {
+        setSucces(false);
+      }, 5000);
     } else {
-      console.log("BAD LOGIN");
+      setError("Invalid email or password");
     }
   };
 
@@ -72,6 +79,8 @@ export const AuthProvider = ({ children }) => {
     authTokens: authTokens,
     loginUser: loginUser,
     logoutUser: logoutUser,
+    succes: succes,
+    error: error,
   };
 
   useEffect(() => {

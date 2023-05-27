@@ -8,7 +8,7 @@ const LoginForm = (props) => {
     props.onCancel();
   };
 
-  let { loginUser } = useContext(AuthContext);
+  let { loginUser , error} = useContext(AuthContext);
 
   return (
     <div>
@@ -28,6 +28,7 @@ const LoginForm = (props) => {
               <button type="submit">Log in</button>
             </div>
           </div>
+          {error && <div className="login-form__error">{error}</div>}
         </Card>
       </form>
     </div>

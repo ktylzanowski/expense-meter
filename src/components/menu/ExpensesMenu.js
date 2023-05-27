@@ -6,7 +6,7 @@ import React, { useState, useEffect, useContext } from "react";
 
 const ExpensesMenu = () => {
   const [details, setDetails] = useState([]);
-  let { authTokens } = useContext(AuthContext);
+  let { authTokens, succes } = useContext(AuthContext);
 
   useEffect(() => {
     axios
@@ -32,6 +32,7 @@ const ExpensesMenu = () => {
 
   return (
     <div>
+      {succes && <p>{succes}</p>}
       <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses items={details} />
     </div>
