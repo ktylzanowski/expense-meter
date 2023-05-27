@@ -7,6 +7,7 @@ const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
+  const [error, setError] = useState(false);
   let { authTokens } = useContext(AuthContext);
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -39,10 +40,11 @@ const ExpenseForm = (props) => {
         setEnteredTitle("");
         setEnteredAmount("");
         setEnteredDate("");
+        setError(false);
         props.onSaveExpenseData(expenseData);
       })
       .catch((error) => {
-        console.error(error);
+        setError("All fields must be completed!");
       });
   };
 
@@ -77,6 +79,7 @@ const ExpenseForm = (props) => {
             onChange={dateChangeHandler}
           />
         </div>
+        {error && <div className="error"><p>{error}</p></div>}
       </div>
       <div className="new-expense__actions">
         <button type="button" onClick={props.onCancel}>

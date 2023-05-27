@@ -1,0 +1,25 @@
+.message {
+  color: white;
+  padding: 1rem;
+  background-color: rgb(31, 31, 31);
+  border: 1px solid white;
+  border-radius: 12px;
+  margin: 2rem auto;
+  width: 50rem;
+  max-width: 95%;
+  text-align: center;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+
+  animation: fadeOut 0.5s ease-out forwards;
+  animation-delay: 4.5s;
+  opacity: 1;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

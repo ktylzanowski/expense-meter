@@ -51,6 +51,10 @@ export const AuthProvider = ({ children }) => {
     setAuthTokens(null);
     setUser(null);
     localStorage.removeItem("authTokens");
+    setSucces("Logout")
+    setTimeout(() => {
+      setSucces(false);
+    }, 5000);
   };
 
   let updateToken = async () => {

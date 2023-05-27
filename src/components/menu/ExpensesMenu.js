@@ -32,8 +32,9 @@ const ExpensesMenu = () => {
 
   return (
     <div>
-      {succes && <p>{succes}</p>}
+      
       <NewExpense onAddExpense={addExpenseHandler} />
+      {succes && <p className="message">{succes}</p>}
       <Expenses items={details} />
     </div>
   );

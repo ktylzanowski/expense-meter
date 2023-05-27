@@ -39,9 +39,9 @@ class ExpenseView(APIView):
             response_data = serializer.data
             response_data['pk'] = instance.pk  
             return Response(response_data, status=status.HTTP_201_CREATED)
-
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 class DeleteExpenseView(APIView):
     def post(self, request):
         expense = get_object_or_404(Expense, pk=request.data['pk'])
         expense.delete()
-        return redirect("ExpenseView")
+        return Response(status=status.HTTP_201_CREATED)
